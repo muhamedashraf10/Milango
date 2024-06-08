@@ -7,14 +7,15 @@ import colors from '../../../styles/colors';
 
 type LayoutProps = PropsWithChildren & {
   HeaderVisibilty?: boolean;
+  style?: {};
 };
 
-const Layout: FC<LayoutProps> = ({HeaderVisibilty = true, children}) => {
+const Layout: FC<LayoutProps> = ({HeaderVisibilty = true, children, style}) => {
   const {top} = useSafeAreaInsets();
   return (
     <View style={[styles.container, {paddingTop: top}]}>
       {HeaderVisibilty && <Header />}
-      <View style={styles.content}>{children}</View>
+      <View style={[styles.content, style]}>{children}</View>
     </View>
   );
 };

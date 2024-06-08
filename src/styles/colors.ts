@@ -31,4 +31,6 @@ export default {
   dangerbg: 'rgb(255, 229, 230)',
   warning: 'rgb(250, 174, 20)',
   warningbg: 'rgb(254, 246, 230)',
+
+  green: '#1f883d',
 };
