@@ -9,6 +9,8 @@ import {StatusBar} from 'react-native';
 import './i18next';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import ErrorBoundary from './components/ErrorBoundry';
+import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
+import appQueryClient, {syncStoragePersister} from './configs/appQueryClient';
 
 export const navigationRef = createNavigationContainerRef<any>();
 
@@ -37,11 +39,15 @@ const App = () => {
 
 const AppWrapper = () => {
   return (
-    <SafeAreaProvider>
-      <ErrorBoundary>
-        <App />
-      </ErrorBoundary>
-    </SafeAreaProvider>
+    <PersistQueryClientProvider
+      persistOptions={{persister: syncStoragePersister}}
+      client={appQueryClient}>
+      <SafeAreaProvider>
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
+      </SafeAreaProvider>
+    </PersistQueryClientProvider>
   );
 };
 
