@@ -4,6 +4,10 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
+
+## node version
+_node version 20
+
 ## Step 1: Start the Metro Server
 
 First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
@@ -11,10 +15,7 @@ First, you will need to start **Metro**, the JavaScript _bundler_ that ships _wi
 To start Metro, run the following command from the _root_ of your React Native project:
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
+# using Yarn
 yarn start
 ```
 
@@ -25,10 +26,8 @@ Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _roo
 ### For Android
 
 ```bash
-# using npm
-npm run android
 
-# OR using Yarn
+# using Yarn
 yarn android
 ```
 
@@ -46,34 +45,120 @@ If everything is set up _correctly_, you should see your new app running in your
 
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+## Step 3: install dependencies
 
-Now that you have successfully run the app, let's modify it.
+```bash
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+yarn setup
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+# or
+_yarn install
+_npx pod-install
+```
 
-## Congratulations! :tada:
+## Step 4: run the app
+```bash
+_check node virsion is 20
+_yarn setup  #(yarn install && npx pod-install)
+_yarn start 
+#ios
+_yarn ios
+#andriod
+_yarn android
+```
 
-You've successfully run and modified your React Native App. :partying_face:
+## folder and file structure
 
-### Now what?
+.
+├── App.tsx
+├── apis
+│   └── EndPoints.ts
+├── assets
+│   ├── svg
+│   
+├── components
+│   ├── DetailsRepository
+│   │   ├── CardRepository.tsx
+│   ├── UIElements
+│   │   ├── Button
+│   │   │   ├── Button.style.ts
+│   │   │   ├── Button.tsx
+│   │   │   └── index.ts
+│   │   ├── SafeAreaView.tsx
+│   │   ├── Layout
+│   │   │   ├── Header.tsx
+│   │   │   ├── Layout.tsx
+│   │   │   └── index.ts
+│   │   ├── PageLoader.tsx
+│   │   ├── Loader.tsx
+│   │   ├── Gradient.tsx
+│   │   ├── ActivityLoader
+│   │   │   
+│   │   └── Text
+│   │       ├── Text.style.ts
+│   │       ├── Text.tsx
+│   │       ├── index.ts
+│   │       └── textTypes.ts
+│   └── Main
+│   │   ├── form.tsx
+│   ├── Error.tsx
+│   ├── NotFound.tsx
+│   ├── ErrorBoundry.tsx
+│   ├── ErrorFallback.tsx
+├── config
+│   ├── appQueryClient.ts
+│   └── axiosInstance.ts
+├── helpers
+├── hooks
+│   ├── useGetInfiniteQuery.ts
+│   ├── useGetUser.ts
+│   ├── useNavigation.ts
+│   └── useRoute.ts
+├── navigation
+│   ├── MainNavigation.tsx
+│   └── routes.ts
+├── screens
+│   ├── Main
+│   │   ├── Main.tsx
+│   │   └── index.ts
+│   └── DetailsRepository
+│       ├── DetailsRepository.tsx
+│       └── index.ts
+├── styles
+│   ├── addShadow.ts
+│   ├── colors.ts
+│   ├── icons.ts
+│   └── unit.ts
+├──types
+│    ├── repo.d.ts
+│    ├── userData.d.ts
+│    └── global.d.ts
+├── i18next
+│    ├── en.ts
+│    └── index.ts
+.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Libraries used
+    # @react-navigation/native
+    # @react-navigation/native-stack
+    # @tanstack/query-async-storage-persister
+    # @tanstack/query-sync-storage-persister
+    # @tanstack/react-query
+    # @tanstack/react-query-persist-client
+    # axios
+    # i18next
+    # lodash,
+    # react
+    # react-i18next
+    # react-native
+    # react-native-bootsplash
+    # react-native-linear-gradient
+    # react-native-mmkv
+    # react-native-restart
+    # react-native-safe-area-context
+    # react-native-screens
+    # react-native-svg
+    # react-native-svg-transformer
+    # react-native-toast-message
+    # url-join
