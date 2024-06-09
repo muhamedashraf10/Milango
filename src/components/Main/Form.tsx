@@ -1,22 +1,31 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {
   StyleSheet,
   View,
   TextInput,
   TouchableOpacity,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import colors from '../../styles/colors';
 import unit from '../../styles/units';
 import addShadow from '../../styles/addShadow';
 import Text from '../UIEllement/Text';
+import useGetUser from '../../hooks/useGetUser';
 
-type TFormMain = {
-  setInputValue: (value: string) => void;
-  inputValue: string;
-};
+const Form: FC = () => {
+  const [input, setInput] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-const Form: FC<TFormMain> = ({setInputValue, inputValue}) => {
+  const reset = () => {
+    setInput('');
+    setSubmitting(false);
+  };
+  const {isInitialLoading} = useGetUser({
+    name: input,
+    reset,
+    submitting,
+  });
   return (
     <View style={[styles.content, addShadow('sm')]}>
       <Image
@@ -25,14 +34,18 @@ const Form: FC<TFormMain> = ({setInputValue, inputValue}) => {
         style={styles.image}
       />
       <TextInput
-        value={inputValue}
+        value={input}
         placeholder="Enter username"
         placeholderTextColor={colors.gray}
-        onChangeText={setInputValue}
+        onChangeText={setInput}
         style={[styles.input, addShadow('sm')]}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        disabled={!input?.length || isInitialLoading}
+        style={styles.button}
+        onPress={() => setSubmitting(true)}>
         <Text text="Submit" bold size="medium" color="white" />
+        {isInitialLoading && <ActivityIndicator color={colors.white} />}
       </TouchableOpacity>
     </View>
   );
@@ -60,7 +73,9 @@ const styles = StyleSheet.create({
     borderRadius: 8 * unit,
   },
   button: {
+    flexDirection: 'row',
     justifyContent: 'center',
+    gap: 20 * unit,
     alignItems: 'center',
     width: '90%',
     height: 42 * unit,

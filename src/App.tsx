@@ -11,6 +11,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import ErrorBoundary from './components/ErrorBoundry';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import appQueryClient, {syncStoragePersister} from './configs/appQueryClient';
+import Toast from 'react-native-toast-message';
 
 export const navigationRef = createNavigationContainerRef<any>();
 
@@ -33,6 +34,7 @@ const App = () => {
         barStyle="dark-content"
       />
       <MainNavigation />
+      <Toast />
     </NavigationContainer>
   );
 };
