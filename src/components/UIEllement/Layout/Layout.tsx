@@ -23,7 +23,6 @@ const Layout: FC<LayoutProps> = ({HeaderVisibilty = true, children, style}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    direction: 'rtl',
   },
   content: {
     flex: 1,

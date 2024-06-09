@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    columnGap: 18 * unit,
+    columnGap: 20 * unit,
     alignSelf: 'flex-start',
     paddingHorizontal: 20 * unit,
     paddingBottom: 15 * unit,

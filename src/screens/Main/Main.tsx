@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet} from 'react-native';
 import Layout from '../../components/UIEllement/Layout';
 import unit from '../../styles/units';
@@ -6,10 +6,9 @@ import colors from '../../styles/colors';
 import Form from '../../components/Main/Form';
 
 const Main = () => {
-  const [inputValue, setInputValue] = useState('');
   return (
     <Layout HeaderVisibilty={false} style={styles.container}>
-      <Form inputValue={inputValue} setInputValue={setInputValue} />
+      <Form />
     </Layout>
   );
 };
