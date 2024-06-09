@@ -12,6 +12,7 @@ import ErrorBoundary from './components/ErrorBoundry';
 import {PersistQueryClientProvider} from '@tanstack/react-query-persist-client';
 import appQueryClient, {syncStoragePersister} from './configs/appQueryClient';
 import Toast from 'react-native-toast-message';
+import BootSplash from 'react-native-bootsplash';
 
 export const navigationRef = createNavigationContainerRef<any>();
 
@@ -20,7 +21,7 @@ const App = () => {
   currTheme.colors.background = 'white';
 
   const onNavigationReady = () => {
-    // handle bootsplash
+    return BootSplash.hide({fade: true});
   };
 
   return (
