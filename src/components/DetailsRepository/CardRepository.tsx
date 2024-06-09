@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {TRepository} from '../../types/repo';
 import Text from '../UIEllement/Text';
@@ -25,6 +25,7 @@ const CardRepository = ({
   selected,
   id,
 }: TCardRepository) => {
+  const [error, setError] = useState(false);
   const handleSelectedCard = (idSelect: number) => {
     if (selected?.includes(idSelect)) {
       const filterSelect = selected?.filter(select => select !== idSelect);
@@ -36,7 +37,16 @@ const CardRepository = ({
   return (
     <View style={[styles.container, addShadow('sm')]}>
       <View style={styles.content}>
-        <Image source={{uri: avatar as string}} style={styles.image} />
+        <Image
+          source={
+            !error
+              ? {uri: avatar as string}
+              : require('../../assets/userProfile.png')
+          }
+          style={styles.image}
+          onError={() => setError(true)}
+          defaultSource={require('../../assets/userProfile.png')}
+        />
         <Text text={myName} style={styles.text} />
       </View>
       <Text

@@ -12,7 +12,7 @@ type TuseGetQueryType = {
 const useGetInfiniteQuery = ({options, name}: TuseGetQueryType) => {
   const api = urlJoin(EndPoints.GithupUser, name || '', EndPoints.Repos);
   const {data, ...rest} = useInfiniteQuery({
-    queryKey: ['Repository'],
+    queryKey: ['myRepository', name],
     queryFn: async ({pageParam = 1}) => {
       const response = await axiosInstance.get(
         `${api}?&page=${pageParam}&per_page=10`,

@@ -13,7 +13,7 @@ type TGetUser = {
 };
 
 const fetchApi = async (name: string) => {
-  const api = urlJoin(EndPoints.GithupUser, name || '');
+  const api = urlJoin(EndPoints.GithupUser, name.trim() || '');
   const {data} = await axiosInstance.get(api);
   return data;
 };
