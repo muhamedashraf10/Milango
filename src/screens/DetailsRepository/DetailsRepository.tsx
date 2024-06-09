@@ -21,6 +21,7 @@ const DetailsRepository = () => {
     hasNextPage,
     isError,
     isFetchingNextPage,
+    error,
     fetchNextPage,
     refetch,
     isInitialLoading,
@@ -43,7 +44,7 @@ const DetailsRepository = () => {
   }
 
   if (isError) {
-    return <Error refetch={refetch} />;
+    return <Error refetch={refetch} error={error} />;
   }
 
   if (_isEmpty(myRepository)) {

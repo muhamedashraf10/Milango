@@ -5,6 +5,10 @@ import EndPoints from '../apis/EndPoints';
 import useNavigation from './useNavigation';
 import routes from '../navigation/routes';
 import Toast from 'react-native-toast-message';
+import i18next from 'i18next';
+import unit from '../styles/units';
+import colors from '../styles/colors';
+import {checkErrorRateLimit} from '../helpers';
 
 type TGetUser = {
   name: string;
@@ -34,6 +38,25 @@ export default function useGetUser({name, reset, submitting}: TGetUser) {
     },
     onError: (err: any) => {
       reset();
+
+      if (checkErrorRateLimit(err)) {
+        return Toast.show({
+          type: 'error',
+          text1: i18next.t('retaLimit') as string,
+          text2: i18next.t('retaLimitTry') as string,
+          position: 'top',
+          text1Style: {
+            fontSize: 10 * unit,
+            fontWeight: '800',
+            color: colors.danger,
+          },
+          text2Style: {
+            fontSize: 10 * unit,
+            fontWeight: '800',
+            color: colors.danger,
+          },
+        });
+      }
       Toast.show({
         type: 'error',
         text1: err?.message,

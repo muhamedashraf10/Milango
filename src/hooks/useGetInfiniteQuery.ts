@@ -3,6 +3,10 @@ import {useMemo} from 'react';
 import axiosInstance from '../configs/axiosInstance';
 import urlJoin from 'url-join';
 import EndPoints from '../apis/EndPoints';
+import Toast from 'react-native-toast-message';
+import i18next from 'i18next';
+import unit from '../styles/units';
+import colors from '../styles/colors';
 
 type TuseGetQueryType = {
   options?: UseInfiniteQueryOptions<any, any>;
@@ -27,6 +31,31 @@ const useGetInfiniteQuery = ({options, name}: TuseGetQueryType) => {
         : pages.length + 1;
     },
     enabled: !!name,
+    onError: (err: any) => {
+      if (err?.status === '403' && err?.message?.includes('rate limit')) {
+        return Toast.show({
+          type: 'error',
+          text1: i18next.t('retaLimit') as string,
+          text2: i18next.t('retaLimitTry') as string,
+          position: 'top',
+          text1Style: {
+            fontSize: 10 * unit,
+            fontWeight: '800',
+            color: colors.danger,
+          },
+          text2Style: {
+            fontSize: 10 * unit,
+            fontWeight: '800',
+            color: colors.danger,
+          },
+        });
+      }
+      Toast.show({
+        type: 'error',
+        text1: err?.message,
+        position: 'top',
+      });
+    },
     ...options,
   });
 

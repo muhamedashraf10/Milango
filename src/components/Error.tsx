@@ -6,28 +6,47 @@ import Text from './UIEllement/Text';
 import Button from './UIEllement/Button';
 import unit from '../styles/units';
 import Layout from './UIEllement/Layout';
+import {checkErrorRateLimit} from '../helpers';
+import RNRestart from 'react-native-restart';
 
 type TError = {
   text?: string;
   style?: {};
   refetch: () => void;
+  error: {};
 };
 
-const Error: FC<TError> = ({text = i18next.t('somethingError'), refetch}) => {
+const Error: FC<TError> = ({
+  text = i18next.t('somethingError'),
+  refetch,
+  error,
+}) => {
+  const errorData = checkErrorRateLimit(error)
+    ? {
+        text: i18next.t<string>('messageReta'),
+        handleFunction: RNRestart.Restart,
+        buttonText: i18next.t<string>('reloadApp'),
+      }
+    : {
+        text,
+        handleFunction: refetch,
+        buttonText: i18next.t<string>('tryAgain'),
+      };
+
   return (
     <Layout style={styles.container}>
       <RequestRejectedIcon />
       <Text
-        text={text as string}
+        text={errorData.text as string}
         color="danger"
         bold
         size="large"
         style={styles.text}
       />
       <Button
-        text={i18next.t<string>('tryAgain')}
+        text={errorData.buttonText}
         color="danger"
-        onPress={refetch}
+        onPress={errorData.handleFunction}
       />
     </Layout>
   );
@@ -42,6 +61,7 @@ const styles = StyleSheet.create({
   text: {
     marginBottom: 20 * unit,
     marginTop: 24 * unit,
+    textAlign: 'center',
   },
 });
 
